@@ -9,11 +9,12 @@ using Microsoft.Extensions.Configuration;
 var configuration = new ConfigurationBuilder()
     .SetBasePath(AppContext.BaseDirectory)
     .AddJsonFile("appsettings.json", false, true)
+    .AddUserSecrets<Program>(optional: true) // <-- Pridá secrets.json pre túto aplikáciu
     .Build();
 
 
 var authConfig = configuration.GetSection("Auth");
-var issuer = $"{authConfig["Issuer"]}/oauth/token";
+var issuer = $"{authConfig["Issuer"]}oauth/token";
 
 var payload = new
 {
@@ -23,8 +24,13 @@ var payload = new
     grant_type = "client_credentials"
 };
 
+var handler = new HttpClientHandler
+{
+    // Bude ignorovať neplatné/vývojárske SSL certifikáty
+    ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
+};
 
-var http = new HttpClient
+var http = new HttpClient(handler)
 {
     Timeout = TimeSpan.FromSeconds(30)
 };

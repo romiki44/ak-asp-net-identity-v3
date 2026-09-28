@@ -17,6 +17,9 @@ public class Program
                 options.Authority = builder.Configuration["Auth:Issuer"];
                 options.Audience = builder.Configuration["Auth:Audience"];
 
+                Console.WriteLine($"Authority: {options.Authority}");
+                Console.WriteLine($"Audience: {options.Audience}");
+
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
