@@ -20,9 +20,25 @@ public class Program
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
+                    ValidIssuer = builder.Configuration["Auth:Issuer"],
                     ValidateAudience = true,
+                    ValidAudience = builder.Configuration["Auth:Audience"],
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true
+                };
+
+                options.Events = new JwtBearerEvents
+                {
+                    OnAuthenticationFailed = context =>
+                    {
+                        Console.WriteLine($"Authentication failed: {context.Exception.Message}");
+                        return Task.CompletedTask;
+                    },
+                    OnTokenValidated = context =>
+                    {
+                        Console.WriteLine($"Token validated for user: {context.Principal?.Identity?.Name}");
+                        return Task.CompletedTask;
+                    }
                 };
             });
 
