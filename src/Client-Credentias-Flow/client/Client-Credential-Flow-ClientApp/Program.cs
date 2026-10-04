@@ -15,6 +15,7 @@ var configuration = new ConfigurationBuilder()
 
 var authConfig = configuration.GetSection("Auth");
 var issuer = $"{authConfig["Issuer"]}oauth/token";
+Console.WriteLine($"Issuer: {issuer}");
 
 var payload = new
 {

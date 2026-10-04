@@ -12,6 +12,14 @@ IConfiguration config = new ConfigurationBuilder()
 
 var validIssuer = config["Auth:Issuer"];
 
+//musi ziskat token z apky na Auth, napr. cez Postman, treba nastavit spravne body a urobit Post request na spravny endpoint
+//Endopint: https://dev-opijr5fcihwlwn8d.eu.auth0.com/oauth/token
+//Body={
+//"client_id": "{{ClientId}}",
+//    "client_secret": "{{ClientSecret}}",
+//    "audience": "{{Audience}}",
+//    "grant_type": "client_credentials"
+//}
 Console.Clear();
 Console.WriteLine("Paste a valid JWT token here:");
 var token = Console.ReadLine();
