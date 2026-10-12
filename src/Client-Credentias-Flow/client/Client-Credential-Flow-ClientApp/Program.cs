@@ -52,7 +52,7 @@ var token = JsonSerializer.Deserialize<Auth0TokenResponse>(body, new JsonSeriali
     PropertyNameCaseInsensitive = true
 });
 
-Console.Clear();
+//Console.Clear();
 Console.WriteLine($"Access Token: {token?.AccessToken}");
 
 
