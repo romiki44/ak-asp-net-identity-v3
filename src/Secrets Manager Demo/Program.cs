@@ -1,4 +1,5 @@
-using AWSSecretsManager.Provider;
+//using AWSSecretsManager.Provider;
+using Azure.Identity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -14,7 +15,10 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        builder.Configuration.AddSecretsManager(); 
+        //builder.Configuration.AddSecretsManager(); //aws
+        builder.Configuration.AddAzureKeyVault(
+            new Uri(builder.Configuration["KeyVaultUri"]!), 
+            new DefaultAzureCredential());
 
         // 1. Add Authentication Services
         builder.Services.AddAuthentication(options =>
@@ -31,9 +35,9 @@ public class Program
             })
             .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
             {
-                options.Authority = builder.Configuration["dev/learn-jwt:Issuer"];
-                options.ClientId = builder.Configuration["dev/learn-jwt:ClientId"];
-                options.ClientSecret = builder.Configuration["dev/learn-jwt:ClientSecret"];
+                options.Authority = builder.Configuration["auth:issuer"];
+                options.ClientId = builder.Configuration["auth:client-id"];
+                options.ClientSecret = builder.Configuration["auth:client-secret"];
                 options.ResponseType = "code";
                 options.ResponseMode = "query";
 
