@@ -29,8 +29,8 @@ public class Program
             .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
             {
                 options.Authority = builder.Configuration["Auth:Issuer"];
-                options.ClientId = builder.Configuration["Auth:ClientId"];
-                options.ClientSecret = builder.Configuration["Auth:ClientSecret"];
+                options.ClientId = builder.Configuration["PKCE:ClientId"];
+                options.ClientSecret = builder.Configuration["PKCE:ClientSecret"];
                 options.ResponseType = "code";
                 options.ResponseMode = "query";
     
