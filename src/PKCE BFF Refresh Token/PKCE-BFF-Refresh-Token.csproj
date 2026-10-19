@@ -6,12 +6,13 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>Client-Credentials-Flow</RootNamespace>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <UserSecretsId>9ef100d0-3c2b-45e5-b2d4-5bf53167cef9</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Duende.BFF" Version="4.1.2" />
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="10.0.5" />
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.5"/>
+        <PackageReference Include="Duende.BFF" Version="4.3.2" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="10.0.13" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.13" />
     </ItemGroup>
 
     <ItemGroup>
